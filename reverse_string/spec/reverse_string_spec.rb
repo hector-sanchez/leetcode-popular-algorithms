@@ -3,7 +3,7 @@
 require_relative '../reverse_string'
 
 RSpec.describe 'reverse_string' do
-  %i[reverse_with_native_method reverse_without_native_method].each do |method|
+  [true, false].each do |use_native_method|
     test_cases = [
       ['hello', 'olleh'],
       ['hello world', 'dlrow olleh'],
@@ -17,8 +17,8 @@ RSpec.describe 'reverse_string' do
     ]
 
     test_cases.each do |input, expected_output|
-      it "reverses '#{input}' to '#{expected_output}' using #{method}" do
-        expect(send(method, input)).to eq(expected_output)
+      it "reverses '#{input}' to '#{expected_output}' #{use_native_method ? 'using native Ruby method' : 'using my own approach'}" do
+        expect(reverse_string(input, use_native_method: use_native_method)).to eq(expected_output)
       end
     end
   end

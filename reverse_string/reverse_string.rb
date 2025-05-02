@@ -1,5 +1,15 @@
 # frozen_string_literal: true
 
+def reverse_string(str, use_native_method: true)
+  if use_native_method
+    reverse_with_native_method(str)
+  else
+    reverse_without_native_method(str)
+  end
+end
+
+private
+
 def reverse_with_native_method(str)
   str&.reverse
 end

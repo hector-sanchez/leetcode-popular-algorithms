@@ -3,7 +3,7 @@
 require_relative '../palindrome'
 
 RSpec.describe 'palindrome' do
-  %i[palindrome_with_native_method? palindrome_without_native_method?].each do |method|
+  [true, false].each do |uses_native_method|
     test_cases = [
       ['racecar', true],
       ['hello', false],
@@ -12,8 +12,8 @@ RSpec.describe 'palindrome' do
     ]
 
     test_cases.each do |input, expected_output|
-      it "checks if '#{input}' is a palindrome using #{method}" do
-        expect(send(method, input)).to eq(expected_output)
+      it "checks if '#{input}' is a palindrome #{uses_native_method ? 'using native Ruby method' : 'using my own approach'}" do
+        expect(palindrome?(input, use_native_method: uses_native_method)).to eq(expected_output)
       end
     end
   end
